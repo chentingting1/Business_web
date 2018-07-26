@@ -1,0 +1,42 @@
+@charset "UTF-8";
+body{
+	background-color:#f6f9fb;
+	
+	
+}
+.login{
+	position: absolute;
+	top: 15%;
+	left:45%;
+}
+.inp{
+	width: 250px;
+	height: 25px;
+	margin: 10px 0px;
+}
+._regester{
+	display: block;
+	font-size: 15px;
+	text-align: right;	
+}
+a:hover{
+	color: orange;
+}
+a:active{
+	color: red;
+}
+a{
+	font-style: initial;
+	text-decoration: none;
+}
+.denglu{
+	height: 35px;
+	background: red;
+	color: whitesmoke;
+	font-size: 18px;
+	font-weight: bold;
+}
+h1{
+				text-align: center;
+				color:green
+			}
