@@ -1,0 +1,44 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.dao.CartDao">
+<resultMap id="cart_product_resultmap" type="com.neuedu.entity.Cart" autoMapping="true">
+
+    <id property="id" column="id"></id>
+   <!-- <result property="productnum" column="productnum"></result>-->
+           <association property="product" javaType="com.neuedu.entity.Product" column="productid" autoMapping="true">
+                <id property="id" column="productid"></id>
+               <!-- <result property="name" column="name"></result>
+                <result property="detail" column="detail"></result>
+                <result property="price" column="price"></result>
+                <result property="image" column="image"></result>
+                <result property="stock" column="stock"></result>-->
+           </association>
+</resultMap>
+
+   <select id="findCart" resultMap="cart_product_resultmap">
+        SELECT c.id id,c.prodctid product,c.productnum productnum,p.name name,p.detail detail,p.price price,p.image image,p.stock stock FROM cart c
+        left JOIN  product p
+        ON c.productid=p.id
+    </select>
+
+    <delete id="clearCart">
+        DELETE FROM cart
+    </delete>
+
+    <!--商品添加到购物车-->
+    <insert id="addCart" parameterType="com.neuedu.entity.Cart" statementType="PREPARED">
+        INSERT INTO cart(productid,productnum)VALUES(#{product.id},#{productnum})
+    </insert>
+
+    <update id="updateCart" parameterType="com.neuedu.entity.Cart">
+        UPDATE cart SET productnum=#{productnum} WHERE id=#{id}
+    </update>
+
+    <select id="getCartById" resultType="com.neuedu.entity.Cart" parameterType="int">
+        SELECT * FROM cart WHERE id=#{id}
+    </select>
+
+</mapper>
+
+

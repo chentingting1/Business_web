@@ -17,17 +17,16 @@ import com.neuedu.utils.DButils;
 
 public class CartDaoImpl implements CartDao {
 
-	//���빺�ﳵ
+
 	public boolean addCart(Cart cart) {
 		Connection coon = null;
 		PreparedStatement st = null;
 		
-		//��ȡ����
-		try {
+try {
 			coon = DButils.getConnection();
-			
+
 			int productid = cart.getProduct().getId();
-			int productnum = cart.getNum();
+			int productnum = cart.getProductnum();
 
 			String sql = "insert into cart(productid,productnum)values(?,?)";
 			st = coon.prepareStatement(sql);
@@ -50,15 +49,9 @@ public class CartDaoImpl implements CartDao {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
 		return false;
 	}
 
-	/*
-	 * �鿴���ﳵ
-	 * */
 	public List<Cart> findCart() {
 		ProductDao pd = new productDaoMySql();
 		
@@ -82,12 +75,10 @@ public class CartDaoImpl implements CartDao {
 				cart.setProductid(productid);
 				cart.setId(rs.getInt("id"));
 				cart.setProduct(product);
-				cart.setNum(rs.getInt("productnum"));
+				cart.setProductnum(rs.getInt("productnum"));
 				
 				carts.add(cart);
-					
 			}
-			
 		} catch (SQLException e) {
 			try {
 				DButils.close(coon, st, rs);
@@ -100,12 +91,7 @@ public class CartDaoImpl implements CartDao {
 		
 		return carts;
 	}
-	
-	
 
-	/*
-	 * �޸Ĺ��ﳵ��Ʒ����
-	 * */
 	public boolean updateCart(Cart cart) {
 		Connection coon = null;
 		PreparedStatement st = null;
@@ -113,7 +99,7 @@ public class CartDaoImpl implements CartDao {
 			coon = DButils.getConnection();
 			String sql = "update cart set productnum=? where id=?";
 			st = coon.prepareStatement(sql);
-			st.setInt(1, cart.getNum());
+			st.setInt(1, cart.getProductnum());
 			st.setInt(2, cart.getId());
 				
 			st.execute();
@@ -128,14 +114,10 @@ public class CartDaoImpl implements CartDao {
 			}
 			e.printStackTrace();
 		}
-		
-		
 		return false;
 	}
 
-	/*
-	 * ɾ�����ﳵ
-	 * */
+
 	public boolean deleteCart(int id) {
 		Connection coon = null;
 		Statement st = null;
@@ -155,23 +137,18 @@ public class CartDaoImpl implements CartDao {
 			}
 			e.printStackTrace();
 		}
-		
-		
 		return false;
-		
-		
 	}
 
 	
 	public int getOrderId() {
 		return 0;
 		
-		
 	}
 
-	//ͨ��ID���ҵ�������ﳵ
+
 	public Cart getCartById(int id) {
-		
+
 		Connection coon = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -188,12 +165,11 @@ public class CartDaoImpl implements CartDao {
 					int _id = rs.getInt("id");
 					int num = rs.getInt("productnum");
 					cart.setId(_id);
-					cart.setNum(num);
+					cart.setProductnum(num);
 					
 				}
 			}
-			
-			
+
 		} catch (SQLException e) {
 			try {
 				DButils.close(coon, st, rs);
@@ -203,11 +179,8 @@ public class CartDaoImpl implements CartDao {
 			}
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		return cart;
+
+        return cart;
 		
 		
 	}

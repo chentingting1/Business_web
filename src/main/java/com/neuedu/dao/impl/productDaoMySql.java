@@ -214,6 +214,7 @@ public boolean addProduct(Product product) {
 	
 		return product;
 	}
+
 	//删除库存
 	public void deletestock(Product product) {
 		

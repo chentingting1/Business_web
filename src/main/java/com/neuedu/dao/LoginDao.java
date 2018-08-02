@@ -4,9 +4,9 @@ import com.neuedu.entity.Account;
 
 public interface LoginDao {
 
-	public Account LogonLogic(String name, String password);
+	 Account LogonLogic(String name, String password);
 
-	public void addToken(Account acc, String token);
+	 void addToken(Account acc, String token);
 	
-	public String findTokenByAccountId(int accountid);
+	String findTokenByAccountId(int accountid);
 }

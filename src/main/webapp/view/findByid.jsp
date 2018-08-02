@@ -15,7 +15,7 @@
 	<table>
 		<tr>
 			<td>购物车商品数量</td>
-			<td><input type="text" name="num" value="${cart.num }" /></td>		
+			<td><input type="text" name="num" value="${cart.productnum }" /></td>
 		</tr>
 					
 		<tr>

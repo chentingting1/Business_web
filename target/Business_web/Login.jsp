@@ -17,7 +17,7 @@
     			<fieldset style="width: 300px;height: 250px;">
 				<!-- <legend>密码登录</legend> -->
 			<input class="inp" name="username" type="text" placeholder="用户名"/><br /><br />
-			<input class="inp"  type="password" name="password" placeholder="密码"/><br /><br />
+			<input class="inp"  type="password" name="password" placeholder="Login密码"/><br /><br />
 			<a href="#"><input class="denglu" style="width: 250px;cursor: pointer;" type="submit" value="登  录" /></a><br /><br />
 			<!-- <a class="_regester" href="register.html" target="_blank">立即注册</a> -->
 			</fieldset>

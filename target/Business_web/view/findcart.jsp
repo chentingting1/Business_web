@@ -30,7 +30,7 @@
 		<td>${cart.product.price }</td>
 		<td>${cart.product.image }</td>
 		<td>${cart.product.stock }</td>
-		<td>${cart.num}</td>
+		<td>${cart.productnum}</td>
 		<td><a href="CartServlet?id=${cart.id}&operation=3">删除</a></td>
 		<td><a href="CartServlet?id=${cart.id}&operation=5">修改</a></td>
 	</tr>

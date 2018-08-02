@@ -4,27 +4,33 @@ import java.io.Serializable;
 
 public class UserOrder implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -8377483199438260899L;
 	private int id;
 	private long order_no;
-	private int user_id;
+	private int userid;
 	private long create_time;
 	private double payment;
 
-	public UserOrder(int id, long order_no, int user_id, long create_time, double payment) {
+	public UserOrder(int id, long order_no, int userid, long create_time, double payment) {
 		super();
 		this.id = id;
 		this.order_no = order_no;
-		this.user_id = user_id;
+		this.userid = userid;
+		this.create_time = create_time;
+		this.payment = payment;
+	}
+
+	public UserOrder( long order_no, int userid, long create_time, double payment) {
+		super();
+		this.order_no = order_no;
+		this.userid = userid;
 		this.create_time = create_time;
 		this.payment = payment;
 	}
 
 	public double getPayment() {
-		return payment;
+		 return payment;
 	}
 
 	public void setPayment(double d) {
@@ -51,12 +57,12 @@ public class UserOrder implements Serializable {
 		this.order_no = order_no;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public long getCreate_time() {
@@ -69,8 +75,8 @@ public class UserOrder implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserOrder [����id=" + id + ", �������" + order_no + ", �û����" + user_id + ", ��������ʱ��" + create_time
-				+ " , �����ܼ۸�" + payment + "]";
+		return "UserOrder [订单id=" + id + ", 订单编号" + order_no + ", 用户编号" + userid + ", 创建订单时间" + create_time
+				+ " , 订单总价格：" + payment + "]";
 	}
 
 }

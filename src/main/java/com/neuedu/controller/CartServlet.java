@@ -36,31 +36,42 @@ public class CartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     CartService cs = new CartServiceImpl();
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String operation = request.getParameter("operation");
+
+		String operation = request.getParameter("operation");
+
 		if(operation.equals("1")) {
+
 			addCart(request,response);
+
 		}else if(operation.equals("2")) {
+
 			findCart(request,response);
+
 		}else if(operation.equals("3")) {
+
 			deleteCart(request,response);
+
 		}else if(operation.equals("4")) {
+
 			updateCart(request,response);
+
 		}else if(operation.equals("5")) {
+
 			getCartById(request,response);
+
 		}
 	
 	}
 
-	
-
-	/*
-	 * �޸Ĺ��ﳵ����Ʒ����
-	 * */
+     //修改
 	public boolean updateCart(Cart cart) {
 
 		return cs.updateCart(cart);
 	}
+
 	private void updateCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = 0;
 		int id =0;
@@ -69,32 +80,28 @@ public class CartServlet extends HttpServlet {
 			num = Integer.parseInt(request.getParameter("num"));
 			id = Integer.parseInt(request.getParameter("id"));
 			Cart cart = getCartById(id);
-			cart.setNum(num);
+			cart.setProductnum(num);
 			boolean result = updateCart(cart);
-			System.out.println("==============");
+
 			if(result) {
-				System.out.println("�޸ĳɹ�");
+				System.out.println("成功");
 				findCart(request, response);
 			}else {
-				System.out.println("�޸�ʧ��");
+				System.out.println("失败");
 			}
 		}catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 
-
-	/*
-	 * ͨ��idѰ�ҹ��ﳵ
-	 * */
+    //通过id寻找购物车
 	public Cart getCartById(int id) {
 		
 		return cs.getCartById(id);
 
 	}
+
 	private void getCartById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = 0;
 		try {
@@ -113,13 +120,12 @@ public class CartServlet extends HttpServlet {
 		
 	}
 
-
-
-	/*ɾ�����ﳵ*/
+	//删除购物车
 	public boolean deleteCart(int id) {
 
 		return cs.deleteCart(id);
 	}
+
 	private void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = 0;
 		boolean result = false;
@@ -130,34 +136,21 @@ public class CartServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(result){
-			System.out.println("ɾ�����ﳵ�ɹ�");
+			System.out.println("success");
 			findCart(request, response);
 		}else {
-			System.out.println("ʧ��");
+			System.out.println("fail");
 		}
 
 		
 	}
 
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		doGet(request, response);
-	}
-	
-	
-	
-	/*
-	 * ���빺�ﳵ
-	 * */
+    //添加购物车
 	public boolean addCart(Cart cart) {
 
 		return cs.addCart(cart);
 	}
+
 	private void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = 0;
 		int num = 0;
@@ -168,7 +161,7 @@ public class CartServlet extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("id"));
 			num = Integer.parseInt(request.getParameter("num"));
 			Product product = p.findProductById(id);
-			cart.setNum(num);
+			cart.setProductnum(num);
 			cart.setProduct(product);
 			result = addCart(cart);
 			
@@ -176,43 +169,46 @@ public class CartServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(result) {
-			System.out.println("���빺�ﳵ�ɹ�");
+			System.out.println("成功");
 			ProductServlet pservlet = new ProductServlet();
 			findCart(request, response);
 		}else{
-			System.out.println("���빺�ﳵʧ��");
+			System.out.println("失败");
 		}
 		
 	}
+
+
 	/*
-	 * JSPҳ��鿴���ﳵ��Ϣ
+	 * 查询购物车
 	 * */
 	public void findCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String methed = request.getParameter("methed");
+
+		/*String methed = request.getParameter("methed");
 		response.setContentType("text/html;charset=utf-8");
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");*/
+
 		PrintWriter pw = response.getWriter();
-		System.out.println("=================");
+
 		CartService cs = new CartServiceImpl();
 		List<Cart> carts = cs.findCart();
-		
-		
+		String callback=request.getParameter("callback");
 		Gson gson = new Gson();
-		String result = gson.toJson(carts);
+		String json = gson.toJson(carts);
+		pw.write(callback+"("+json+")");
+		/*
 		System.out.println(result);
-		pw.println(methed+"("+result+")");
-
-		
-		//request.setAttribute("carts", carts);
-		//request.getRequestDispatcher("findcart.jsp").forward(request, response);
+		pw.println(result);
+		request.setAttribute("carts", carts);
+		request.getRequestDispatcher("findcart.jsp").forward(request, response);*/
 		
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
-
-	
-	
-
+		doGet(request, response);
+	}
 }

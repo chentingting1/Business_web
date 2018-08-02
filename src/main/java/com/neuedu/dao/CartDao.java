@@ -6,16 +6,16 @@ import com.neuedu.entity.Cart;
 
 public interface CartDao {
 
-	boolean addCart(Cart cart);//��
+	boolean addCart(Cart cart);
 	
-	List<Cart> findCart();//��
+	List<Cart> findCart();
 	
-	boolean updateCart(Cart cart);//��
+	boolean updateCart(Cart cart);
 	
-	boolean deleteCart(int id);//ɾ
+	boolean deleteCart(int id);
 	
 	int getOrderId();
-	
+
 	Cart getCartById(int id);
 	
 	void clearCart();

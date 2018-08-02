@@ -7,14 +7,11 @@ import com.neuedu.entity.UserOrderItem;
 
 public interface OrderService {
 
-	// ��������
 	boolean createOrder();
 
-	// �鿴����
 	List<UserOrder> findOrder();
 
 	List<UserOrderItem> findOrderItem();
 
-	// ��ȡ������
 	long orderNo();
 }

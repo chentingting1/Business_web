@@ -46,11 +46,7 @@ public class ProductServlet extends HttpServlet{
 			}else if(operation.equals("6")) {
 				updateShow(request,respose);
 			}	
-				
-			
 		}
-			
-		
 	}
 	
 	private void updateShow(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
@@ -61,7 +57,7 @@ public class ProductServlet extends HttpServlet{
 		request.getRequestDispatcher("updateshow.jsp").forward(request, respose);
 		
 	}
-	/*չʾ������Ʒ*/
+	/**/
 	private void showProduct(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Product product = findProductById(id);
@@ -70,7 +66,7 @@ public class ProductServlet extends HttpServlet{
 		request.getRequestDispatcher("showall.jsp").forward(request, respose);
 		
 	}
-	/*ɾ����Ʒ*/
+	/**/
 	public boolean deleteProduct(int id) {
 		
 		return ps.deleteProduct(id);
@@ -88,20 +84,21 @@ public class ProductServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		if(result) {
-			System.out.println("ɾ����Ʒ�ɹ�");
+			System.out.println("成功");
 			jump(request, respose);
 			
 		}else {
-			System.out.println("ɾ����Ʒʧ��");
+			System.out.println("失败");
 		}
 		
 		
 	}
-	/*�޸���Ʒ��Ϣ*/
+	/**/
 	public boolean updateProduct(Product product) {
 		
 		return ps.updateProduct(product);
 	}
+
 	private void updateProduct(HttpServletRequest request,HttpServletResponse respose) throws ServletException, IOException {
 		int id = 0;
 		double price = 0.0;
@@ -127,25 +124,26 @@ public class ProductServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		if(result) {
-			System.out.println("�޸���Ʒ�ɹ�");
+			System.out.println("成功");
 			jump(request, respose);
 		}else {
-			System.out.println("�޸���Ʒʧ��");
+			System.out.println("失败");
 		}
 		
 		
 		
 	}
 
-	/*չʾ��Ʒ��jspҳ��*/
 
-	/*public void findAll(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
+
+	/*/public void findAll(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
 		System.out.println("=================");
 		List<Product> products = ps.findAll();
 		request.setAttribute("products", products);
 		request.getRequestDispatcher("product.jsp").forward(request, respose);
 		
 	}*/
+	//查询购物车
 	public void findAll(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
 	
 		ProductService ps = new ProductServiceImplSql();
@@ -157,7 +155,7 @@ public class ProductServlet extends HttpServlet{
 		request.getRequestDispatcher("product.jsp").forward(request, respose);
 	
 	}
-	//��תҳ��
+
 	public void jump(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
 		ProductService ps = new ProductServiceImplSql();
 		PageModel<Product> pageModel = ps.findProductByPage(1, 3);
@@ -167,9 +165,7 @@ public class ProductServlet extends HttpServlet{
 	
 	
 	
-	/*
-	 * �����Ʒ
-	 * */
+    //将商品添加到购物车
 	private void addProduct(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
 		double price = 0.0;
 		int stock = 0;
@@ -188,10 +184,10 @@ public class ProductServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		if(result) {
-			System.out.println("�����Ʒ�ɹ�");
+			System.out.println("成功");
 			jump(request, respose);
 		}else {
-			System.out.println("�����Ʒʧ��");
+			System.out.println("失败");
 		}
 		
 		
@@ -206,15 +202,9 @@ public class ProductServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		doGet(req,resp);
 	}
-	
-	
-	
-	
-	//ͨ��ID
+
 	public Product findProductById(int id) {
 		
 		return ps.findProductById(id);
 	}
-	
-	
 }

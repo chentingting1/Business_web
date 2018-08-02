@@ -31,8 +31,8 @@ public class Utils {
 		uorderItem.setProduct_name(cart.getProduct().getName());
 		uorderItem.setProduct_image(cart.getProduct().getImage());
 		uorderItem.setCurrent_unit_price(cart.getProduct().getPrice());// ��Ʒ�۸�
-		uorderItem.setQuantity(cart.getNum()); // ��Ʒ����������
-		uorderItem.setTotal_price(cart.getProduct().getPrice() * cart.getNum());
+		uorderItem.setQuantity(cart.getProductnum()); // ��Ʒ����������
+		uorderItem.setTotal_price(cart.getProduct().getPrice() * cart.getProductnum());
 		uorderItem.setCreate_time(System.currentTimeMillis());
 
 		return uorderItem;

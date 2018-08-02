@@ -1,0 +1,89 @@
+
+#创建数据库
+create database if not exists business;
+
+#用户表
+create table account(
+accountid     int      primary key auto_increment,
+username      varchar(20) ,
+password	   varchar(20) 
+);
+
+#插入表字段
+alter table account add token varchar(50);
+
+#插入数据
+insert into account (username,password)values('admin','21232f297a57a5a743894a0e4a801fc3');
+
+
+#商品表
+create table product(
+	id  int primary key auto_increment,
+    	name varchar(20) not null comment'商品名称',
+    	detail text null comment'商品详细',
+    	price decimal(10,2) comment'商品价格',
+    	image varchar(20) null comment'商品图片',
+        stock int
+);
+
+#插入表字段
+alter table product add stock int null comment'商品库存';
+
+#购物车表
+create table cart(
+	id int primary key auto_increment,
+	productid int     comment'来源product表中的商品id',
+    productnum  int   comment'加入购物车的商品数量'
+);
+
+#插入表字段
+alter table cart add xiaoji decimal(10,2)  comment'共计价钱';
+
+#订单表
+create table userorder(
+	id int primary key auto_increment,
+	order_no bigint not null comment'订单编号',
+    userid int ,
+    shipping_id   int  comment'地址id，来源于地址表',
+    payment 	decimal(10,2)	comment'实际付款总金额',
+    payment_type  	int   comment'支付类型（1在线支付 2货到付款）',
+    postage   		int		comment'运费',
+    status		int 	comment'订单状态',
+    payment_time	timestamp	comment'支付时间',
+    send_time	timestamp	comment'支付时间',
+    end_time	timestamp	comment'交易完成时间',
+    close_time	timestamp	comment'交易关闭时间',
+    create_time	timestamp	comment'创建时间',
+    update_time timestamp	comment'更新时间'
+);
+
+#订单明细表
+create table userorderitem(
+	order_no     bigint    not null	comment'和订单编号一样',
+    user_id		int		not null	comment'用户id',
+    product_id    int       comment'来源product表中的商品id',
+    product_name	varchar(10)	comment'商品名字',
+    product_image	text	comment'商品图片',
+    current_unit_price	decimal(10,2)	comment'生成订单时的价格',
+    quantity	int		comment'购买商品数量',
+    postage   		int		comment'运费',
+    total_price		decimal(10,2)	comment'总价',
+    create_time		timestamp	comment'创建时间',
+    update_time		timestamp	comment'更新时间'
+);
+
+#类别表
+create table category(
+       id int primary key auto_increment,
+       parent_id int,
+       name varchar(20),
+       status int comment'类别状态',
+       sort_order int comment'排序编号',
+       create_time		timestamp	comment'创建时间',
+       update_time		timestamp	comment'更新时间'
+);
+
+
+
+
+

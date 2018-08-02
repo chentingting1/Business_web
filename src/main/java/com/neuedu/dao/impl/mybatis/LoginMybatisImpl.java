@@ -1,0 +1,53 @@
+package com.neuedu.dao.impl.mybatis;
+
+import com.neuedu.dao.LoginDao;
+import com.neuedu.entity.Account;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.logging.log4j.core.config.Order;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
+
+public class LoginMybatisImpl implements LoginDao{
+
+
+    @Override
+    public Account LogonLogic(String name, String password) {
+         String resource = "mybatis-config.xml";
+         Reader reader = null;
+         SqlSession session;
+         try {
+             reader = Resources.getResourceAsReader(resource);
+         } catch (IOException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+         }
+         SqlSessionFactory sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+         session = sqlMapper.openSession();
+         //map集合存的用户名和密码
+         Map<String,String> map = new HashMap<String, String>();
+         map.put("username",name);
+         map.put("password",password);
+         /* 1.namespace+id*/
+         Account account = session.selectOne("com.neuedu.entity.Account.findByUsernameAndPassword", map);
+         System.out.println(account);
+         session.close();
+         return account;
+
+ }
+
+    @Override
+    public void addToken(Account acc, String token) {
+
+    }
+
+    @Override
+    public String findTokenByAccountId(int accountid) {
+        return null;
+    }
+}

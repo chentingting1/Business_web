@@ -1,24 +1,34 @@
 package com.neuedu.entity;
 
 import java.io.Serializable;
-//���ﳵ
 
 public class Cart implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3340604346152912765L;
+
 	private int id;
-	private Product product;//Product���͵�product
-	private int num;
+	private Product product;
+	private int productnum;
 	private int productid;
 
-	public Cart(int id, Product product, int num) {
+	public Cart(int id, Product product, int productnum) {
 		super();
 		this.id = id;
 		this.product = product;
-		this.num = num;
+		this.productnum = productnum;
+	}
+	public Cart( int productid, int productnum) {
+		super();
+
+		this.productid = productid;
+		this.productnum = productnum;
+	}
+
+	public Cart(int id, int productid, int productnum) {
+		super();
+        this.id=id;
+		this.productid = productid;
+		this.productnum = productnum;
 	}
 
 	public Cart() {
@@ -38,30 +48,33 @@ public class Cart implements Serializable {
 	}
 
 	public void setProduct(Product product) {
+
 		this.product = product;
 	}
 
-	public int getNum() {
-		return num;
+	public int getProductnum()
+	{
+		return productnum;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setProductnum(int productnum)
+	{
+		this.productnum = productnum;
 	}
 	
-	
-
 	public int getProductid() {
+
 		return productid;
 	}
 
 	public void setProductid(int productid) {
+
 		this.productid = productid;
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", product=" + product + ", num=" + num + ", productid=" + productid + "]";
+		return "Cart [id=" + id + ", product=" + product + ", productnum=" + productnum + ", productid=" + productid + "]";
 	}
 
 

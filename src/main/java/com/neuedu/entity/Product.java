@@ -4,10 +4,8 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6420732982998980008L;
+
 	private int id;
 	private String name;
 	private String detail;
@@ -25,6 +23,15 @@ public class Product implements Serializable {
 		this.stock = stock;
 	}
 
+	public Product(int id,String name, String detail, double price, String image, int stock) {
+		super();
+		this.id=id;
+		this.name = name;
+		this.detail = detail;
+		this.price = price;
+		this.image = image;
+		this.stock = stock;
+	}
 	public Product(int id, String name, String detail, double price, String image) {
 		super();
 		this.id = id;
@@ -32,8 +39,17 @@ public class Product implements Serializable {
 		this.detail = detail;
 		this.price = price;
 		this.image = image;
-
 	}
+
+    public Product(int id, String name, String detail, double price) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.price = price;
+
+    }
+
 
 	public Product( String name, String detail, double price, String image) {
 		super();
@@ -44,17 +60,16 @@ public class Product implements Serializable {
 		this.image = image;
 
 	}
-	
-	
-	public Product(int id, String name, String detail, double price, String image, int stock) {
+
+
+	public Product( String name, String detail, double price) {
 		super();
-		this.id = id;
+
 		this.name = name;
 		this.detail = detail;
 		this.price = price;
-		this.image = image;
-		this.stock = stock;
 	}
+
 
 	public Product() {
 		super();
